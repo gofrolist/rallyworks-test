@@ -12,6 +12,12 @@ module "label" {
   attributes = ["cluster"]
   delimiter  = "-"
 
+  additional_tag_map = {
+    "Environment" = "Dev",
+    "Service"     = "EKS Cluster"
+
+  }
+
   tags = {
     "Environment" = "Dev",
     "Service"     = "EKS Cluster"
