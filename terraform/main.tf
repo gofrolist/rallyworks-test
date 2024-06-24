@@ -56,6 +56,11 @@ locals {
       access_policy_associations = {
         ClusterAdmin = {}
       }
+    },
+    "arn:aws:iam::769906345927:user/evasilenko" = {
+      access_policy_associations = {
+        ClusterAdmin = {}
+      }
     }
   }
 
