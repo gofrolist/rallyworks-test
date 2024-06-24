@@ -114,3 +114,9 @@ variable "private_ipv6_enabled" {
   default     = false
   description = "Whether to use IPv6 addresses for the pods in the node group"
 }
+
+variable "default_nacls_enabled" {
+  type        = bool
+  description = "Enable or disable the default NACLs. Disable them to use custom NACLs."
+  default     = true
+}
