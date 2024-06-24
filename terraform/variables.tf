@@ -114,3 +114,36 @@ variable "private_ipv6_enabled" {
   default     = false
   description = "Whether to use IPv6 addresses for the pods in the node group"
 }
+
+variable "subnets_per_az_count" {
+  type        = number
+  description = <<-EOT
+    The number of subnet of each type (public or private) to provision per Availability Zone.
+    EOT
+  default     = 1
+
+  validation {
+    condition = var.subnets_per_az_count > 0
+    # Validation error messages must be on a single line, among other restrictions.
+    # See https://github.com/hashicorp/terraform/issues/24123
+    error_message = "The `subnets_per_az` value must be greater than 0."
+  }
+}
+
+variable "subnets_per_az_names" {
+  type = list(string)
+
+  description = <<-EOT
+    The subnet names of each type (public or private) to provision per Availability Zone.
+    This variable is optional.
+    If a list of names is provided, the list items will be used as keys in the outputs `named_private_subnets_map`, `named_public_subnets_map`,
+    `named_private_route_table_ids_map` and `named_public_route_table_ids_map`
+    EOT
+  default     = ["common"]
+}
+
+variable "default_nacls_enabled" {
+  type        = bool
+  description = "Enable or disable the default NACLs. Disable them to use custom NACLs."
+  default     = true
+}
