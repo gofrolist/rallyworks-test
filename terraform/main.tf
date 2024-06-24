@@ -102,6 +102,7 @@ module "subnets" {
   ipv6_egress_only_igw_id = [module.vpc.ipv6_egress_only_igw_id]
   ipv4_cidr_block         = [module.vpc.vpc_cidr_block]
   ipv6_cidr_block         = [module.vpc.vpc_ipv6_cidr_block]
+  max_nats                = 1
   nat_gateway_enabled     = true
   nat_instance_enabled    = false
   route_create_timeout    = "5m"
@@ -114,6 +115,10 @@ module "subnets" {
 
   private_open_network_acl_enabled = var.default_nacls_enabled
   public_open_network_acl_enabled  = var.default_nacls_enabled
+
+  private_subnets_enabled         = true
+  private_subnets_additional_tags = local.private_subnets_additional_tags
+  public_subnets_additional_tags  = local.public_subnets_additional_tags
 
   tags = merge(
     local.tags,
